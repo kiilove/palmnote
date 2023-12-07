@@ -103,6 +103,7 @@ export function useFirestoreAddData() {
       setData(addedData);
       if (callback) callback(addedData);
     } catch (error) {
+      console.log(error);
       setError(error);
     } finally {
       setLoading(false);

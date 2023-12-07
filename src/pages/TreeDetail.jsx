@@ -122,19 +122,14 @@ const TreeDetail = () => {
     }
   };
 
-  const handleAddFeed = async (propData, propQr) => {
+  const handleAddFeed = async (propData, propBar, propQr) => {
+    console.log(propData);
     try {
       await firestoreAdd.addData(
         "treefeed",
         { ...propData, refQrCode: propQr },
         () => {
-          const feedArray = [...feeds];
-          feedArray.push({
-            ...propData,
-            refQrCode: propQr,
-          });
-          setFeeds([...feedArray]);
-          console.log(feeds);
+          fetchData(propBar, propQr);
         }
       );
     } catch (error) {
@@ -181,10 +176,10 @@ const TreeDetail = () => {
               <DatePicker
                 locale={locale}
                 defaultValue={dayjs(new Date())}
-                onChange={(e) => {
+                onChange={(value) => {
                   setNoteContent(() => ({
                     ...noteContent,
-                    noteDate: e.target.value,
+                    noteDate: value.toDate(),
                   }));
                 }}
               />
@@ -206,7 +201,13 @@ const TreeDetail = () => {
               <button
                 className="flex justify-center items-center bg-blue-300 rounded-r-lg"
                 style={{ width: "40px" }}
-                onClick={() => handleAddFeed(noteContent, location?.state.qr)}
+                onClick={() =>
+                  handleAddFeed(
+                    noteContent,
+                    location?.state.bar,
+                    location?.state.qr
+                  )
+                }
               >
                 <IoSend
                   className="text-gray-700"
@@ -220,10 +221,9 @@ const TreeDetail = () => {
               feeds.map((feed, fIdx) => {
                 const { noteDate, noteText } = feed;
                 console.log(noteDate);
-                const noteDateEncode =
-                  noteDate === "방금전"
-                    ? "방금전"
-                    : dayjs(noteDate?.toDate()).format("YYYY-MM-DD HH:mm:ss");
+                // const noteDateEncode = (noteDate = dayjs(
+                //   noteDate.toDate()
+                // ).format("YYYY-MM-DD HH:mm:ss"));
                 return (
                   <div className="flex flex-col w-full h-full">
                     <div className="flex">
@@ -231,7 +231,8 @@ const TreeDetail = () => {
                         className="text-gray-800"
                         style={{ fontSize: "13px" }}
                       >
-                        작성일자:{noteDateEncode}
+                        작성일자:
+                        {dayjs(noteDate.toDate()).format("YYYY-MM-DD")}
                       </span>
                     </div>
                     <div className="flex w-full border">
