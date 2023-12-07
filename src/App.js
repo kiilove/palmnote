@@ -5,6 +5,7 @@ import QrcodeReader from "./pages/QrcodeReader";
 import QrcodeScan2 from "./pages/QrcodeScan2";
 import QrcodeScan3 from "./pages/QrcodeScan3";
 import TreeDetail from "./pages/TreeDetail";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/qrscanner" element={<QrScanner />} />
         <Route path="/treedetail" element={<TreeDetail />} />
+        <Route path="/errorpage" element={<ErrorPage />} />
 
         {/* <Route path="/test" element={<Main children={<AntdTest />} />} />
         <Route

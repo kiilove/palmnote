@@ -23,7 +23,7 @@ const QrScanner = () => {
 
       const newData = JSON.parse(data?.text);
       console.log(newData);
-      setResult(newData.qr);
+      setResult({ ...newData });
     }
   };
 
@@ -66,7 +66,7 @@ const QrScanner = () => {
 
       // 0.5초 딜레이 후에 네비게이션 수행
       setTimeout(() => {
-        navigate("/treedetail", { state: { qr: result } });
+        navigate("/treedetail", { state: { ...result } });
 
         // 로딩 상태를 false로 설정하여 Spin을 숨깁니다.
         setIsLoading(false);
@@ -143,6 +143,7 @@ const QrScanner = () => {
                 transform: "translate(-50%, -50%)", // 중앙 정렬
                 border: "10px solid white",
                 width: "80%",
+                maxWidth: "500px",
                 height: "50%",
                 boxSizing: "border-box",
               }}
