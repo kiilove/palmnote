@@ -1,9 +1,16 @@
 import { Button, Form, Input, Space } from "antd";
-import React from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
+  const formRef = useRef();
+  const onFinish = (values) => {
+    const barValue = values.qrValue.slice(0, -7);
+    const newValue = { bar: barValue, qr: values.qrValue };
+
+    navigate("treedetail", { state: { ...newValue } });
+  };
   return (
     <div className="w-full h-screen bg-gray-100 flex justify-center items-start">
       <div
@@ -27,11 +34,17 @@ const Home = () => {
             labelCol={{
               span: 6,
             }}
+            ref={formRef}
+            onFinish={onFinish}
           >
-            <Form.Item label="바코드입력" name="qrValue">
+            <Form.Item label="QR코드입력" name="qrValue">
               <Space.Compact>
                 <Input />
-                <Button type="primary" className="bg-blue-500">
+                <Button
+                  type="primary"
+                  className="bg-blue-500"
+                  htmlType="submit"
+                >
                   검색
                 </Button>
               </Space.Compact>
