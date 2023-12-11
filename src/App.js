@@ -2,17 +2,17 @@ import Home from "./pages/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import QrScanner from "./pages/QrScanner";
 import QrcodeReader from "./pages/QrcodeReader";
-import QrcodeScan2 from "./pages/QrcodeScan2";
-import QrcodeScan3 from "./pages/QrcodeScan3";
+
 import TreeDetail from "./pages/TreeDetail";
 import ErrorPage from "./pages/ErrorPage";
+import QRCodeScanner from "./pages/QrCodeScanner";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/qrscanner" element={<QrScanner />} />
+        <Route path="/qrscanner" element={<QRCodeScanner />} />
         <Route path="/treedetail" element={<TreeDetail />} />
         <Route path="/errorpage" element={<ErrorPage />} />
 

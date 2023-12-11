@@ -119,17 +119,17 @@ const QrScanner = () => {
           >
             <QrReader
               ref={qrRef}
-              delay={100}
+              delay={300}
               style={{ width: "100%", maxWidth: "1000px" }}
               onError={handleError}
               onScan={handleScan}
-              resolution={2500}
+              resolution={600}
               constraints={{
                 audio: false,
                 video: {
                   deviceId:
                     currentCamera === null
-                      ? cameras[3]?.deviceId
+                      ? cameras[0]?.deviceId
                       : currentCamera,
                 },
               }}
